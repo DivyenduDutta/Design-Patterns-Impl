@@ -4,6 +4,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
 import com.divyendu.designPatterns.models.Person;
+import com.divyendu.helper.PatternHelper;
 
 /**
  * Singleton Pattern impl in Java for generic type M
@@ -37,22 +38,25 @@ public class Singleton<M> {
 	 * 
 	 * @return Singleton - Unique instance of Singleton class
 	 */
-	public static <T>Singleton getSingleInstance(Class<T> clazz) {
+	public static <T>Singleton getSingleInstance(Class<T> clazz, Object[] constructorArgs) {
 		if(!instance) {
 			instance = true;
+			Constructor<?> ctor = null;
 			try {
-				Constructor[] ctors = clazz.getDeclaredConstructors();
-				Constructor ctor = null;
-				for (int i = 0; i < ctors.length; i++) {
-				    ctor = ctors[i];
-				    if (ctor.getGenericParameterTypes().length == 0)
-				    	break;
+				if(null == constructorArgs || constructorArgs.length == 0) {
+					ctor = clazz.getDeclaredConstructor();
+				}else {
+					Class[] args = new Class[constructorArgs.length];
+					for(int i=0; i<constructorArgs.length; i++) {
+						args[i] = PatternHelper.toWrapper(constructorArgs[i].getClass());
+					}
+					ctor = clazz.getDeclaredConstructor(args);
 				}
-				T innerInstance = (T)ctor.newInstance();
+				T innerInstance = (T)ctor.newInstance(constructorArgs);
 			
 				uniqueInstance = new Singleton();
 				uniqueInstance.setUniqueInnerInstance(innerInstance);
-			}catch(InvocationTargetException | InstantiationException | IllegalAccessException e) {
+			}catch(InvocationTargetException | InstantiationException | IllegalAccessException | NoSuchMethodException e) {
 				e.printStackTrace();
 			}
 		}
