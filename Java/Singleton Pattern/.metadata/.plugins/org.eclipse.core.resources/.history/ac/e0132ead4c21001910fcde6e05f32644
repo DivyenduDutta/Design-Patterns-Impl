@@ -1,0 +1,5 @@
+package com.divyendu.designPatterns.models;
+
+public class Person {
+
+}

@@ -1,0 +1,55 @@
+package com.divyendu.designPatterns.Singleton;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+
+/**
+ * Singleton Pattern impl in Java
+ * Type of creational pattern. Focuses on:
+ * 1. How objects are created
+ * 2. Isolate the object creation details itself.
+ * 3. Code Independent of the type of object to be created
+ * 
+ * @author divyendu
+ *
+ */
+public class Singleton<M> {
+	private M uniqueInnerInstance; 
+	private static Singleton uniqueInstance;
+	private static boolean instance;
+	
+	//make the constructor private so that clients can't create an instance of it
+	private Singleton() {}
+	
+	/**
+	 * Checks whether an instance exists, if it does then return the existing instance otherwise return a new
+	 * instance
+	 * 
+	 * @return Singleton - Unique instance of Singleton class
+	 */
+	public static <T>Singleton getInstance(Class<T> clazz) {
+		if(!instance) {
+			instance = true;
+			try {
+				Constructor<?> ctor = clazz.getConstructor();
+				T innerInstance = (T)ctor.newInstance();
+			
+				uniqueInstance = new Singleton();
+				uniqueInstance.setUniqueInnerInstance(innerInstance);
+			}catch(InvocationTargetException | InstantiationException | IllegalAccessException | NoSuchMethodException e) {
+				e.printStackTrace();
+			}
+		}
+		return uniqueInstance;
+	}
+
+	private void setUniqueInnerInstance(M uniqueInnerInstance) {
+		this.uniqueInnerInstance = uniqueInnerInstance;
+	}
+
+	public getInnerInstance() {
+		return this.uniqueInnerInstance
+	}
+	
+	
+}

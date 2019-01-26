@@ -1,0 +1,15 @@
+package com.divyendu.designPatterns.models;
+
+public class Person {
+	private int id;
+	private String name;
+	
+	public Person() {
+		System.out.println("Person instantiated!!");
+	}
+	
+	public String toString() {
+		return "Person:"+this.id+" - "+this.name;
+	}
+	
+}
