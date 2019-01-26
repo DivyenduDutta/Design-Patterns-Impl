@@ -2,8 +2,6 @@ package com.divyendu.designPatterns.Singleton;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-
-import com.divyendu.designPatterns.models.Person;
 import com.divyendu.helper.PatternHelper;
 
 /**
@@ -27,14 +25,18 @@ public class Singleton<M> {
 	/**
 	 * Checks whether an instance exists, if it does then return the existing instance otherwise return a new
 	 * instance. Creates and sets the M::uniqueInnerInstance type of the passed instance type. 
-	 * Coded to invoke only the default constructor of the passed instance type
+	 * Coded to invoke any constructor of the passed instance type based on the call
 	 * 
-	 * [Usage]  Singleton instance1 = Singleton.getSingleInstance(Person.class);
-	 * 			Singleton instance2 = Singleton.getSingleInstance(Person.class);
-	 * 				instance1 is same as instance2
-	 * 			Person p1 = (Person)instance1.getInnerInstance();
-	 * 			Person p2 = (Person)instance2.getInnerInstance();
-	 * 				p1 is also same as p2
+	 * [Usage]  Object[] constructorArgs = {1,"Hyundai"};
+	 * 			Singleton carInstance1 = Singleton.getSingleInstance(Car.class, constructorArgs);
+	 * 			Car c1 = (Car)carInstance1.getInnerInstance();
+	 * 			Object[] constructorArgs2 = {2,"Volvo"};
+	 * 			Singleton carInstance2 = Singleton.getSingleInstance(Car.class, constructorArgs2);
+	 * 			Car c2 = (Car)carInstance2.getInnerInstance();
+	 * 				carInstance1 is same as carInstance2
+	 * 				c1 is same as c2
+	 * 			
+	 * 			If second argument passed to getSingleInstance() is null, then invoke default constructor
 	 * 
 	 * @return Singleton - Unique instance of Singleton class
 	 */
@@ -61,6 +63,15 @@ public class Singleton<M> {
 			}
 		}
 		return uniqueInstance;
+	}
+	
+	/**
+	 * Allows client to free the Singleton instance so that client can get a single unique instance of 
+	 * another type
+	 */
+	public static void freeInstance() {
+		System.out.println("Freed existing instance");
+		instance = false;
 	}
 	
 	/* making this method private since only getSingleInstance() should be allowed to set the inner instance type 
