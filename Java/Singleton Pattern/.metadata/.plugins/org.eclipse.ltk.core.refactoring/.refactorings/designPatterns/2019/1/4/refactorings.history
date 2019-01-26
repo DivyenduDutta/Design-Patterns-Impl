@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Move element &apos;Singleton.java&apos; to &apos;designPatterns/src/main/java/com.divyendu.designPatterns.Singleton&apos;&#x0A;- Original project: &apos;designPatterns&apos;&#x0A;- Destination element: &apos;designPatterns/src/main/java/com.divyendu.designPatterns.Singleton&apos;&#x0A;- Original element: &apos;com.divyendu.designPatterns.Singleton.java&apos;&#x0A;- Update references to refactored element" description="Move compilation unit" destination="/src\/main\/java&lt;com.divyendu.designPatterns.Singleton" element1="/src\/main\/java&lt;com.divyendu.designPatterns{Singleton.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.move" patterns="*" policy="org.eclipse.jdt.ui.moveResources" qualified="false" references="true" stamp="1548492071882" units="1" version="1.0"/>
-</session>
