@@ -6,22 +6,20 @@ class Singleton_API(object):
 
     '''Do not access _uniqueInnerInstance directly. Access it via getUniqueInnerInstance()'''
     _uniqueInnerInstance = None
-    _is_instance_present = False
 
     def __new__(cls, class_name, *args):
         ''' Overriding __new__() to customize object creation '''
         if not hasattr(cls, 'instance'):
             cls.instance = super(Singleton_API, cls).__new__(cls)
-            return cls.instance 
-        cls._is_instance_present  = True
+            cls._uniqueInnerInstance = class_name(*args)
         return cls.instance
 
-    def __init__(self, class_name, *args):
-        print(self._is_instance_present)
-        if not self._is_instance_present:
-            self._uniqueInnerInstance = class_name(*args)
-
     def getUniqueInnerInstance(self):
-        return self._uniqueInnerInstance 
+        return self._uniqueInnerInstance
+    
+    @classmethod
+    def free_instance(cls):
+        delattr(cls, "instance")  
+
 
 
