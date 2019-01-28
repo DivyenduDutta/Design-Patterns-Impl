@@ -5,7 +5,6 @@ class Car:
         self.model = model
 
     def printDetails(self):
-        print("sad")
         print("The details are: Car {} has speed {}".format(self.model, self.speed))
 
 class Person:
