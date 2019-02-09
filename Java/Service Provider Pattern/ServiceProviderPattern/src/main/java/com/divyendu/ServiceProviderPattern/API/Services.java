@@ -47,6 +47,8 @@ public class Services {
 	public static void registerProvider(String providerName, IServiceProvider provider) {
 		if(providers.containsKey(providerName)) {
 			throw new IllegalArgumentException(providerName+" already registered");
+		} else if(providers.containsValue(provider)) {
+			throw new IllegalArgumentException("Provider already registered");
 		}
 		providers.put(providerName, provider);
 	}
@@ -61,6 +63,8 @@ public class Services {
 		provider = providers.get(DEFAULT_PROVIDER_NAME);
 		if(provider == null) {
 			throw new IllegalArgumentException("No default provider registered");
+		} else if(providers.containsValue(provider)) {
+			throw new IllegalArgumentException("Provider already registered");
 		}
 		return provider.newService();
 	}
