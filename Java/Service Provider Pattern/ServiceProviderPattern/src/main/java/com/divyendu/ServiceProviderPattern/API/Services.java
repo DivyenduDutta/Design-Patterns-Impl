@@ -32,6 +32,9 @@ public class Services {
 	 * @param provider - The actual provider to be registered
 	 */
 	public static void registerdefaultProvider(IServiceProvider provider) {
+		if(providers.containsKey(DEFAULT_PROVIDER_NAME)) {
+			throw new IllegalArgumentException(DEFAULT_PROVIDER_NAME+" already registered");
+		}
 		registerProvider(DEFAULT_PROVIDER_NAME, provider);
 	}
 	
@@ -42,6 +45,9 @@ public class Services {
 	 * @param provider     - The actual provider to be registered
 	 */
 	public static void registerProvider(String providerName, IServiceProvider provider) {
+		if(providers.containsKey(providerName)) {
+			throw new IllegalArgumentException(providerName+" already registered");
+		}
 		providers.put(providerName, provider);
 	}
 	
