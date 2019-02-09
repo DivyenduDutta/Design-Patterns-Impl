@@ -28,7 +28,7 @@ public class ServiceProviderClient {
 		Services.registerProvider("StudentProvider2", studentProvider2);
 		
 		//Retrieve the specific Student Provider via the access API
-		IStudentService studentService1 = (IStudentService)Services.getServiceProvider("StudentProvider1");
+		IStudentService studentService1 = (IStudentService)Services.getService("StudentProvider1");
 		
 		//use created student list to initialize student service
 		studentService1.initialize(myStudentList);
