@@ -58,7 +58,7 @@ public class Services {
 	 * 
 	 * @return IService  - new instance of the service
 	 */
-	public static IService getDefaultServiceProvider() {
+	public static IService getDefaultService() {
 		IServiceProvider provider = null;
 		provider = providers.get(DEFAULT_PROVIDER_NAME);
 		if(provider == null) {
@@ -75,7 +75,7 @@ public class Services {
 	 * @param providerName - Name of the provider corresponding to which the service is needed
 	 * @return IService  - new instance of the service
 	 */
-	public static IService getServiceProvider(String providerName) {
+	public static IService getService(String providerName) {
 		IServiceProvider provider = null;
 		IService service = null;
 		if(!providerName.isEmpty()) {
