@@ -3,7 +3,7 @@ package com.divyendu.ServiceProviderPattern.ServiceInterface;
 /**
  * 
  * Service Interface component of the Service Provider Pattern
- * Have all implementations implement this interface
+ * Have all client service interfaces extend this interface
  * 
  * @author divyendu
  *
