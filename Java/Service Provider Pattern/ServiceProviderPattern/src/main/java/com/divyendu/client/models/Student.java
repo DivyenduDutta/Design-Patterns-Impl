@@ -1,4 +1,4 @@
-package com.divyendu.models;
+package com.divyendu.client.models;
 
 /**
  * Student model class - to be used in StudentService
