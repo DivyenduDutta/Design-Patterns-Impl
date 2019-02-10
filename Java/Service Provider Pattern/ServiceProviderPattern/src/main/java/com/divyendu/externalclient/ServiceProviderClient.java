@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.divyendu.ServiceProviderPattern.API.Services;
-import com.divyendu.ServiceProviderPattern.ServiceInterface.IService;
 import com.divyendu.client.interfaces.IStudentService;
 import com.divyendu.client.models.Student;
 import com.divyendu.client.servicesProviders.StudentProvider;
@@ -20,8 +19,8 @@ public class ServiceProviderClient {
 		myStudentList.add(new Student(4, "Donald", 67.0));
 		
 		//Create the Student Provider
-		StudentProvider studentProvider1 = new StudentProvider();
-		StudentProvider studentProvider2 = new StudentProvider();
+		StudentProvider studentProvider1 = new StudentProvider(myStudentList);
+		StudentProvider studentProvider2 = new StudentProvider(myStudentList);
 		
 		//Register Student Provider with the API
 		Services.registerProvider("StudentProvider1", studentProvider1);
@@ -30,8 +29,6 @@ public class ServiceProviderClient {
 		//Retrieve the specific Student Provider via the access API
 		IStudentService studentService1 = (IStudentService)Services.getService("StudentProvider1");
 		
-		//use created student list to initialize student service
-		studentService1.initialize(myStudentList);
 		try {
 		//Use the returned Student Service to call services
 		System.out.println(studentService1.getBestStudentAsPerMarks().getStudentName());
