@@ -1,5 +1,7 @@
 package com.divyendu.ServiceProviderPattern.API;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -38,6 +40,18 @@ public class Services {
 		registerProvider(DEFAULT_PROVIDER_NAME, provider);
 	}
 	
+	private static boolean isServiceInProvider(IServiceProvider provider) {
+		boolean result = false;
+		if(!providers.isEmpty()) {
+			List<IServiceProvider> registeredProviders = new ArrayList<IServiceProvider>(providers.values());
+			for(IServiceProvider myProvider : registeredProviders) {
+				result |= myProvider.compareProvider(provider);
+			}
+		}
+		
+		return result;
+	}
+	
 	/**
 	 * Service Registration API
 	 * 
@@ -50,23 +64,14 @@ public class Services {
 		} else if(providers.containsValue(provider)) {
 			throw new IllegalArgumentException("Provider already registered");
 		}
-		providers.put(providerName, provider);
-	}
-	
-	/**
-	 * Returns an instance of the Service associated with the default provider 
-	 * 
-	 * @return IService  - new instance of the service
-	 */
-	public static IService getDefaultService() {
-		IServiceProvider provider = null;
-		provider = providers.get(DEFAULT_PROVIDER_NAME);
-		if(provider == null) {
-			throw new IllegalArgumentException("No default provider registered");
-		} else if(providers.containsValue(provider)) {
-			throw new IllegalArgumentException("Provider already registered");
+		if(!isServiceInProvider(provider)) {
+			provider.createService();
+			providers.put(providerName, provider);
+		} else {
+			System.out.println("The Service instance is already present in one of the registered providers");
+			System.out.println("Consider checking the argument passed when creating the provider for duplicates");
 		}
-		return provider.newService();
+		
 	}
 	
 	/**
@@ -83,7 +88,7 @@ public class Services {
 			if(provider == null) {
 				throw new IllegalArgumentException("No provider registered for "+providerName);
 			}
-			service = provider.newService();
+			service = provider.retrieveService();
 		}
 		return service;
 	}
