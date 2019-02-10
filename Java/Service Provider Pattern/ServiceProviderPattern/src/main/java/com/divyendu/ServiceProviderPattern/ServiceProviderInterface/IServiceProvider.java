@@ -12,8 +12,7 @@ import com.divyendu.ServiceProviderPattern.ServiceInterface.IService;
  */
 public interface IServiceProvider {
 	
-	// Have all providers provide an implementation of newService() to get an 
-	// instance of the corresponding service
-	// Making the method default scope by choice. Should only be accessible from within the service access API
-	IService newService();
+	void createService();
+	boolean compareProvider(IServiceProvider provider);
+	IService retrieveService();
 }
