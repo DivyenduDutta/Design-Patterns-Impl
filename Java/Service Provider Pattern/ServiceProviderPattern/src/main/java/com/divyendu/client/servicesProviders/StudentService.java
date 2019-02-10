@@ -26,9 +26,11 @@ class StudentService implements IStudentService {
 	 * 
 	 * @param myStudentList
 	 */
-	public void initialize(List<Student> myStudentList) {
+	void initialize(List<Student> myStudentList) {
 		studentList = myStudentList;
 	}
+	
+	
 	
 	/**
 	 * Finds and returns the Student having the highest overall marks
@@ -66,6 +68,12 @@ class StudentService implements IStudentService {
 	public void display() {
 		String details = "Student list has"+this.studentList.size()+" students";
 		System.out.println(details);
+	}
+
+
+
+	public List<Student> retrieveStudentList() {
+		return studentList;
 	}
 	
 	
