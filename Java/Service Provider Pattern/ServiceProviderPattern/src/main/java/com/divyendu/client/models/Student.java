@@ -1,5 +1,6 @@
 package com.divyendu.client.models;
 
+
 /**
  * Student model class - to be used in StudentService
  * 
@@ -18,6 +19,19 @@ public class Student {
 		this.studentName = studentName;
 		this.overAllMarks = overAllMarks;
 	}
+	
+	
+	public boolean compare(Student student2) {
+		if(this.studentID == student2.studentID && 
+				this.overAllMarks == student2.overAllMarks &&
+				this.studentName.equals(student2.studentName)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 
 	public int getStudentID() {
 		return studentID;
